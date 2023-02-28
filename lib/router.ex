@@ -16,9 +16,9 @@ defmodule FinchBugReproduce.Router do
     sleep = if conn.params["sleep"], do: String.to_integer(conn.params["sleep"]), else: 5
 
     spawn(fn ->
-      IO.puts("SERVER: closing tcp connection after #{sleep} seconds")
+      FinchBugReproduce.Utils.log_with_time("SERVER: closing tcp connection after #{sleep} seconds")
       Process.sleep(sleep * 1000)
-      IO.puts("SERVER: closing tcp connection due to unstable network")
+      FinchBugReproduce.Utils.log_with_time("SERVER: closing tcp connection due to unstable network")
       Port.close(port)
     end)
 
